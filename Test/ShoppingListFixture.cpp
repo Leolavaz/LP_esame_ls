@@ -58,6 +58,12 @@ TEST_F(ShoppingListSuite, TestRemoveItem) {
 }
 //aggiungere test per rimozione impossibile
 
+TEST_F(ShoppingListSuite, ImpTestRemove){
+    s.removeItem("carota");
+    int size=s.getShoppingList().size();
+    ASSERT_EQ(size,2);
+}
+
 
 
 TEST_F(ShoppingListSuite,TestSubject)
