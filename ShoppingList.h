@@ -36,6 +36,8 @@ public:
     void removeItem(const string& name);
     const string &getShoppingListName() const;
 
+    void setitembought(const string& name);
+
     void setShoppingListName(const string &shoppingListName);
 
     const map<string, shared_ptr<Item>> &getShoppingList() const;

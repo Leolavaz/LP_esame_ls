@@ -10,6 +10,7 @@ using namespace std;
 void print(const ShoppingList& sl) {
     cout << "Nome lista:  " << sl.getShoppingListName() << endl << endl;
     string cat;
+    int count = 0;
     bool first;
     for (auto &itr: sl.getCategories()) {
         cat = itr.first;
@@ -21,7 +22,13 @@ void print(const ShoppingList& sl) {
                         cout << "Categoria:  " << cat << endl;
                         first = false;
                     }
-
+                    if (s.second->getQuantity() != 0) {
+                        cout << s.first << "     " << s.second->getQuantity();
+                        if (s.second->getBought())
+                            cout << "       Bought" << endl;
+                        else {
+                            cout << "       Not bought" << endl;
+                            count++;
 
 
                         }
@@ -29,6 +36,8 @@ void print(const ShoppingList& sl) {
                 }
             }
         }
+    }cout << "oggetti da comprare: " << count << endl;
+}
 
 
 
@@ -149,7 +158,7 @@ int main() {
                 cin>>username;
                 User u;
                 Usr.insert(make_pair(username,u));
-                cout<<"A quale lista vuoi collegare"<<username<<"?"<<endl;
+                cout<<"A quale lista vuoi collegare "<<username<<"?"<<endl;
                 cin>>name_sl;
                 auto itrl=Slist.find(name_sl);
                 auto itru=Usr.find(username);
@@ -178,6 +187,7 @@ int main() {
         cout<<"premi 2 per togliere una lista da un utente"<<endl;
         cout<<"premi 3 per rimuovere un articolo dalla lista"<<endl;
         cout<<"premi 4 per vedere tutte le liste"<<endl;
+        cout<<"premi 5 per impostare come comprato un oggetto"<<endl;
         cout<<"premi 5 per uscire"<<endl;
         int res;
         cin>>res;
@@ -254,8 +264,22 @@ int main() {
                 }
                 break;
             }
-
             case 5:{
+                string itemname;
+                string listname;
+                cout<<"inserisci lista e nome oggetto"<<endl;
+                cin>>listname;
+                cin>>itemname;
+                auto itr=Slist.find(listname);
+                auto itl=itms.find(itemname);
+                if (itr == Slist.end() || itl == itms.end()){
+                    throw std::invalid_argument("Lista o oggetto invalido");}
+                else
+                    itr->second.setitembought(itemname);
+                break;
+            }
+
+            case 6:{
                 act=false;
                 break;
             }

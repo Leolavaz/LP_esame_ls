@@ -21,6 +21,16 @@ void ShoppingList::notify() {
 }
 
 
+
+void ShoppingList::setitembought(const std::string &name) {
+    auto itr=SL.find(name);
+    if(itr!=SL.end()){
+        itr->second->setBought(true);
+        notify();}
+    else
+        throw std::invalid_argument("nome oggetto non valido");
+}
+
 void ShoppingList::addItem(const Item &item) {
 
     auto itr = SL.find(item.getIname());

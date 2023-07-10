@@ -32,14 +32,19 @@ public:
     int getQuantity()const {
         return quantity;
     }
-
-
+   bool getBought()const{
+        return bought;
+    }
+   void setBought(bool b){
+        bought=b;
+    }
 
 
 private:
     string IName;
     int quantity;
     string category;
+    bool bought;
 };
 
 
