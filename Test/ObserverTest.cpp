@@ -8,7 +8,7 @@
 
 class ObserverTest : public testing::Test, public Observer {
 public:
-    void update(const string& listName) override {
+    void update(const string &listName) override {
         updated = true;
     }
 
@@ -28,8 +28,8 @@ protected:
     }
 
     bool updated = false;
-    ShoppingList s {"sport"};
-    Item palla {"palla","calcio",3};
+    ShoppingList s{"sport"};
+    Item palla{"palla", "calcio", 3};
 
 };
 

@@ -15,28 +15,30 @@
 #include <memory>
 
 #include <iostream>
+
 using namespace std;
 
 
-class ShoppingList: public Subject {
+class ShoppingList : public Subject {
 public:
 
-    ShoppingList( const string &SL_N) : SL_name(SL_N) {}
+    ShoppingList(const string &SL_N) : SL_name(SL_N) {}
 
-    virtual ~ShoppingList()=default;
+    virtual ~ShoppingList() = default;
 
-    virtual void subscribe(Observer* o) override;
+    virtual void subscribe(Observer *o) override;
 
-    virtual void unsubscribe(Observer* o) override;
+    virtual void unsubscribe(Observer *o) override;
 
     virtual void notify() override;
 
-    void addItem(const Item& item);
+    void addItem(const Item &item);
 
-    void removeItem(const string& name);
+    void removeItem(const string &name);
+
     const string &getShoppingListName() const;
 
-    void setitembought(const string& name);
+    void setitembought(const string &name);
 
     void setShoppingListName(const string &shoppingListName);
 
@@ -44,12 +46,12 @@ public:
 
     const list<Observer *> &getObservers() const;
 
-    const map <string,int> &getCategories() const;
-    void printList();
+    const map<string, int> &getCategories() const;
+
 
 private:
     string SL_name;
-    list<Observer*> observers;
+    list<Observer *> observers;
     map<string, shared_ptr<Item>> SL;
     map<string, int> category;
 

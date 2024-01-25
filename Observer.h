@@ -8,11 +8,10 @@ using namespace std;
 
 class Observer {
 public:
-    virtual ~Observer()=default;
+    virtual ~Observer() = default;
 
-    virtual void update(const string& listName)=0;
+    virtual void update(const string &listName) = 0;
 };
-
 
 
 #endif //UNTITLED40_OBSERVER_H

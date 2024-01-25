@@ -16,13 +16,13 @@ using namespace std;
 class User : public Observer {
 public:
     virtual ~User() {
-        for (auto &itr:myLists)
+        for (auto &itr: myLists)
             itr.second->unsubscribe(this);
     }
 
     virtual void update(const string &listName) override;
 
-    void addShoppingList(ShoppingList& shoppingList);
+    void addShoppingList(ShoppingList &shoppingList);
 
     void removeShoppingList(const string &name);
 
@@ -33,7 +33,6 @@ private:
     map<string, shared_ptr<ShoppingList>> myLists;
 
 };
-
 
 
 #endif //UNTITLED40_USER_H

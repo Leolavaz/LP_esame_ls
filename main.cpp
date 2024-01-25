@@ -86,7 +86,7 @@ int main() {
                 string nameitem;
                 string  cat;
                 int q;
-                cout<<"inserisci nome,categoria e quantità dell'oggetto"<<endl;
+                cout<<"inserisci nome,categoria e quantita' dell'oggetto"<<endl;
                 cin>>nameitem;
                 cin>>cat;
                 do{
@@ -188,7 +188,7 @@ int main() {
         cout<<"premi 3 per rimuovere un articolo dalla lista"<<endl;
         cout<<"premi 4 per vedere tutte le liste"<<endl;
         cout<<"premi 5 per impostare come comprato un oggetto"<<endl;
-        cout<<"premi 5 per uscire"<<endl;
+        cout<<"premi 6 per uscire"<<endl;
         int res;
         cin>>res;
         switch(res){

@@ -1,8 +1,9 @@
 
 
 #include "User.h"
-void User::addShoppingList(ShoppingList& shoppingList) {
-    auto sListPtr= make_shared<ShoppingList>(shoppingList);
+
+void User::addShoppingList(ShoppingList &shoppingList) {
+    auto sListPtr = make_shared<ShoppingList>(shoppingList);
     myLists.insert(make_pair(shoppingList.getShoppingListName(), sListPtr));
     shoppingList.subscribe(this);
 }
