@@ -16,6 +16,9 @@ public:
         return updated;
     }
 
+    int getCountUpdate()const{
+        return countUpdate;
+    };
 protected:
 
     void SetUp() override {
@@ -27,7 +30,9 @@ protected:
         s.unsubscribe(this);
     }
 
+
     bool updated = false;
+    int countUpdate=0;
     ShoppingList s{"sport"};
     Item palla{"palla", "calcio", 3};
 
@@ -36,9 +41,14 @@ protected:
 
 TEST_F(ObserverTest, Update) {
     ASSERT_FALSE(isUpdated());
+    ASSERT_EQ(getCountUpdate(), 0);
 
     s.addItem(palla);
     ASSERT_TRUE(isUpdated());
+    ASSERT_EQ(getCountUpdate(), 1);
+
+    s.addItem(palla);
+    ASSERT_EQ(getCountUpdate(), 2);
 }
 
 

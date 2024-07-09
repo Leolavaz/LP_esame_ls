@@ -19,13 +19,13 @@ void ShoppingList::notify() {
 }
 
 
-void ShoppingList::setitembought(const std::string &name) {
+void ShoppingList::setItemBought(const std::string &name) {
     auto itr = SL.find(name);
     if (itr != SL.end()) {
         itr->second->setBought(true);
         notify();
     } else
-        throw std::invalid_argument("nome oggetto non valido");
+        throw std::invalid_argument("Nome oggetto non valido");
 }
 
 void ShoppingList::addItem(const Item &item) {

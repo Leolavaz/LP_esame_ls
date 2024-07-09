@@ -38,7 +38,7 @@ public:
 
     const string &getShoppingListName() const;
 
-    void setitembought(const string &name);
+    void setItemBought(const string &name);
 
     void setShoppingListName(const string &shoppingListName);
 
