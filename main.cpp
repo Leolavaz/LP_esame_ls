@@ -275,7 +275,7 @@ int main() {
                 if (itr == Slist.end() || itl == itms.end()){
                     throw std::invalid_argument("Lista o oggetto invalido");}
                 else
-                    itr->second.setitembought(itemname);
+                    itr->second.setItemBought(itemname);
                 break;
             }
 
