@@ -10,6 +10,7 @@ class ObserverTest : public testing::Test, public Observer {
 public:
     void update(const string &listName) override {
         updated = true;
+        countUpdate++;
     }
 
     bool isUpdated() const {

@@ -18,6 +18,3 @@ TEST(ItemSuite, TestSetItemquantity) {
     Item i("pane","cibo",3);
     ASSERT_THROW(i.setQuantity(-2),out_of_range);
 }
-TEST(ItemSuite,TestBought){
-
-}
