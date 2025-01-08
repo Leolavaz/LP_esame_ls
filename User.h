@@ -10,6 +10,7 @@
 #include <exception>
 #include <stdexcept>
 #include <memory>
+#include <vector>
 
 using namespace std;
 
@@ -27,6 +28,7 @@ public:
     void removeShoppingList(const string &name);
 
     const map<string, shared_ptr<ShoppingList >> &getLists() const;
+    vector<string> getListName() const;
 
 private:
     string UserName;

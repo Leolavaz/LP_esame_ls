@@ -16,29 +16,52 @@ void print(const ShoppingList& sl) {
         cat = itr.first;
         first = true;
         if (itr.second != 0) {
-            for (auto &s: sl.getShoppingList()) {
-                if (s.second->getCat() == cat) {
+            for (auto &item: sl.getShoppingList()) {
+                if (item->getCat() == cat) {
                     if (first && itr.second != 0) {
                         cout << "Categoria:  " << cat << endl;
                         first = false;
                     }
-                    if (s.second->getQuantity() != 0) {
-                        cout << s.first << "     " << s.second->getQuantity();
-                        if (s.second->getBought())
+                    if (item->getQuantity() != 0) {
+                        cout << item->getIname() << "     " << item->getQuantity();
+                        if (item->getBought())
                             cout << "       Bought" << endl;
                         else {
                             cout << "       Not bought" << endl;
                             count++;
-
-
                         }
                     }
                 }
             }
         }
-    }cout << "oggetti da comprare: " << count << endl;
+    }
+    cout << "Oggetti da comprare: " << count << endl;
 }
 
+
+void printItemsByCategory(const ShoppingList &sl) {
+    auto itemsByCategory = sl.getItemsByCategory();
+    for (const auto &categoryPair : itemsByCategory) {
+        cout << "Categoria: " << categoryPair.first << endl;
+        for (const auto &item : categoryPair.second) {
+            cout << "  - " << item->getIname() << " (Quantità: " << item->getQuantity() << ")";
+            if (item->getBought()) {
+                cout << " [Comprato]";
+            } else {
+                cout << " [Non comprato]";
+            }
+            cout << endl;
+        }
+    }
+}
+
+void printUnboughtItems(const ShoppingList &sl) {
+    auto unboughtItems = sl.getUnboughtItems();
+    cout << "Oggetti non comprati:" << endl;
+    for (const auto &item : unboughtItems) {
+        cout << "  - " << item->getIname() << " (Quantità: " << item->getQuantity() << ", Categoria: " << item->getCat() << ")" << endl;
+    }
+}
 
 
 
@@ -158,7 +181,7 @@ int main() {
                 cin>>username;
                 User u;
                 Usr.insert(make_pair(username,u));
-                cout<<"A quale lista vuoi collegare "<<username<<"?"<<endl;
+                cout<<"A quale lista vuoi collegare "<<username<<" ?"<<endl;
                 cin>>name_sl;
                 auto itrl=Slist.find(name_sl);
                 auto itru=Usr.find(username);
@@ -188,7 +211,9 @@ int main() {
         cout<<"premi 3 per rimuovere un articolo dalla lista"<<endl;
         cout<<"premi 4 per vedere tutte le liste"<<endl;
         cout<<"premi 5 per impostare come comprato un oggetto"<<endl;
-        cout<<"premi 6 per uscire"<<endl;
+        cout<<"premi 6 per stampare la lista in base alle categorie"<<endl;
+        cout<<"premi 7 per stampare la lista di oggetti non comprati"<<endl;
+        cout<<"premi 8 per uscire"<<endl;
         int res;
         cin>>res;
         switch(res){
@@ -251,17 +276,21 @@ int main() {
             }
 
             case 4:{
-                cout<<"Ecco la lista della spesa"<<endl;
-                for(auto&itr:Usr)
-                {
-                    cout<<endl;
-                    cout<<"     User name:  "<< itr.first<<endl;
-                    for(auto &itl: itr.second.getLists())
-                    {
-                        cout<<endl;
-                        print(*itl.second);
+
+                cout << "Inserisci il nome dell'utente:" << endl;
+                string userName;
+                cin >> userName;
+                auto itUser = Usr.find(userName);
+                if (itUser != Usr.end()) {
+                    auto listNames = itUser->second.getListName();
+                    cout << "Liste associate a " << userName << ":" << endl;
+                    for (const auto &name : listNames) {
+                        cout << " - " << name << endl;
                     }
-                }
+                } else {
+                    throw std::invalid_argument("utente non trovato");}
+                   // cerr << "Utente non trovato." << endl;
+
                 break;
             }
             case 5:{
@@ -278,8 +307,32 @@ int main() {
                     itr->second.setItemBought(itemname);
                 break;
             }
-
             case 6:{
+                cout << "Inserisci il nome della lista:" << endl;
+                string listName;
+                cin >> listName;
+                auto it = Slist.find(listName);
+                if (it != Slist.end()) {
+                    printItemsByCategory(it->second);
+                } else {
+                    cerr << "Lista non trovata." << endl;
+                }
+                break;
+            }
+            case 7:{
+                cout << "Inserisci il nome della lista:" << endl;
+                string listName;
+                cin >> listName;
+                auto it = Slist.find(listName);
+                if (it != Slist.end()) {
+                    printUnboughtItems(it->second);
+                } else {
+                    cerr << "Lista non trovata." << endl;
+                }
+                break;
+            }
+
+            case 8:{
                 act=false;
                 break;
             }
@@ -287,15 +340,19 @@ int main() {
         }
 
     }while(act);
-    cout<<"Ecco la lista della spesa"<<endl;
-    for(auto&itr:Usr)
-    {
-        cout<<endl;
-        cout<<"     Utente :  "<< itr.first<<endl;
-        for(auto &itl: itr.second.getLists())
-        {
-            cout<<endl;
-            print(*itl.second);
+
+    cout << "Ecco la lista della spesa" << endl;
+    for (auto &itr : Usr) {
+        cout << endl;
+        cout << "     Utente :  " << itr.first << endl;
+        for (const auto &listName : itr.second.getListName()) {
+            auto itList = Slist.find(listName);
+            if (itList != Slist.end()) {
+                cout << endl;
+                print(itList->second);
+            } else {
+                cerr << "Errore: Lista non trovata (" << listName << ") per l'utente " << itr.first << endl;
+            }
         }
     }
 

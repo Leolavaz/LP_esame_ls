@@ -31,3 +31,10 @@ const map<string, shared_ptr<ShoppingList>> &User::getLists() const {
     return myLists;
 }
 
+vector<string> User::getListName() const {
+    vector<string> listNames;
+    for (const auto &entry : myLists) {
+        listNames.push_back(entry.first);
+    }
+    return listNames;
+}

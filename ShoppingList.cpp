@@ -82,9 +82,15 @@ const string &ShoppingList::getShoppingListName() const {
 }
 
 
-const map<string, shared_ptr<Item>> &ShoppingList::getShoppingList() const {
-    return SL;
+
+vector<shared_ptr<Item>> ShoppingList::getShoppingList() const {
+    vector<shared_ptr<Item>> itemList;
+    for (const auto &pair : SL) {
+        itemList.push_back(pair.second);
+    }
+    return itemList;
 }
+
 
 const list<Observer *> &ShoppingList::getObservers() const {
     return observers;
@@ -93,3 +99,22 @@ const list<Observer *> &ShoppingList::getObservers() const {
 const map<string, int> &ShoppingList::getCategories() const {
     return category;
 }
+
+map<string, vector<shared_ptr<Item>>> ShoppingList::getItemsByCategory() const {
+    map<string, vector<shared_ptr<Item>>> itemsByCategory;
+    for (const auto &pair : SL) {
+        itemsByCategory[pair.second->getCat()].push_back(pair.second);
+    }
+    return itemsByCategory;
+}
+
+vector<shared_ptr<Item>> ShoppingList::getUnboughtItems() const {
+    vector<shared_ptr<Item>> unboughtItems;
+    for (const auto &pair : SL) {
+        if (!pair.second->getBought()) {
+            unboughtItems.push_back(pair.second);
+        }
+    }
+    return unboughtItems;
+}
+

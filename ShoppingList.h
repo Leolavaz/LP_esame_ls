@@ -13,8 +13,9 @@
 #include <exception>
 #include <stdexcept>
 #include <memory>
-
+#include <vector>
 #include <iostream>
+#include<algorithm>
 
 using namespace std;
 
@@ -42,13 +43,15 @@ public:
 
     void setShoppingListName(const string &shoppingListName);
 
-    const map<string, shared_ptr<Item>> &getShoppingList() const;
+   vector<shared_ptr<Item>> getShoppingList() const;
 
     const list<Observer *> &getObservers() const;
 
     const map<string, int> &getCategories() const;
 
+    vector<shared_ptr<Item>> getUnboughtItems() const;
 
+    map<string, vector<shared_ptr<Item>>> getItemsByCategory() const;
 private:
     string SL_name;
     list<Observer *> observers;
