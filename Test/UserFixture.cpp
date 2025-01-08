@@ -22,19 +22,7 @@ protected:
 
 };
 
-/*
-TEST_F(UserSuite, TestAddShoppingList) {
-    u.addShoppingList(s3);
 
-    ASSERT_EQ(3, u.getLists().size());
-}
-
-
-TEST_F(UserSuite, TestRemoveShoppingList) {
-    u.removeShoppingList("Casa");
-
-    ASSERT_EQ(1, u.getLists().size());
-}*/
 
 TEST_F(UserSuite, TestAddShoppingList) {
     u.addShoppingList(s3);
